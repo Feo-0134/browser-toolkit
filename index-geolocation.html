@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Get Location Script</title>
+  </head>
+  <body>
+    <h1>Click to Get you Location</h1>
+    <form>
+      <button type="button" onclick="myFunction()">Click Me!</button>
+    </form>
+    <p id="demo">Your location will be show here.</p>
+
+    <script>
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      };
+
+      var clickedBtn = false
+
+      function success(pos) {
+        var crd = pos.coords;
+
+        document.getElementById("demo").innerHTML =
+          "Your current position is:\t" +
+          `Latitude : ${crd.latitude}\t` +
+          `Longitude: ${crd.longitude}`;
+      }
+
+      function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      }
+
+      
+      function myFunction() {
+        if (clickedBtn === true) return; 
+        navigator.geolocation.getCurrentPosition(success, error, options);
+        clickedBtn = true
+      }
+    </script>
+  </body>
+</html>
